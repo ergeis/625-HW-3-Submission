@@ -18,6 +18,5 @@ Coefficient estimates and their standard errors and p-values for the multiple li
 Create a linear regression model for the given input
 }
 \examples{
-library(EGeis625)
 lin_reg(mpg~disp + cyl + hp + drat + wt + as.factor(gear), mtcars)
 }
