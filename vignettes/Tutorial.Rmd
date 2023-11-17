@@ -1,0 +1,36 @@
+---
+title: "Tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(EGeis625)
+```
+
+To use the lin_reg function in the "EGeis625" package:
+
+```{r}
+lin_reg(mpg~disp + cyl + hp + drat + wt, mtcars)
+```
+
+The function's first input here is "y~x" where y is miles per gallon and x is the list of covariates that includes displacement, number of cylinders, gross horsepower, rear axel ratio, and total car weight. The second input is the data set from which these variables and their values are drawn from. The 'mtcars' dataset is standard in base r and contains all of these variables. 
+
+To account for categorical variables as covariates:
+
+```{r}
+lin_reg(mpg~disp + cyl + hp + drat + wt + as.factor(gear), mtcars)
+```
+
+This usage of the lin_reg function includes all of the same outcome and covariates as mentioned above, but adds one more covariate; the number of gears the car has. This could be coded as continuous, but since there are only three possible values, we will treat it as categorical in this case. To account for categorical covariates, add the prefix of as.factor() to the covariate name. The function will automatically set a baseline value and create the appropriate number of factors in the model for this covariate.
+

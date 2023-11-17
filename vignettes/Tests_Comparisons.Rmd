@@ -1,0 +1,51 @@
+---
+title: "Tests_and_Comparisons"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tests_and_Comparisons}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(EGeis625)
+```
+
+To compare our function to the base r linear regression function, first we will make a model using the lin_reg() function in the EGeis625 package:
+```{r}
+package_model <- lin_reg(mpg~disp + cyl + hp + drat + wt, mtcars)
+```
+
+Then, we will run an identical model using the base r ls() function:
+```{r}
+base_r_model <- lm(mpg~disp + cyl + hp + drat + wt, data = mtcars)
+summary(base_r_model)
+```
+
+Comparing the values of the lin_reg() output with the values of the lm() output:
+```{r}
+#Test if all of the coefficients are the same (or very similar)
+all.equal(as.numeric(package_model$Coefficient), as.numeric(base_r_model$coefficients))
+
+#Test if  all of the standard error values are the same (or very similar)
+all.equal(as.numeric(package_model$StandardError), as.numeric(coef(summary(base_r_model))[, "Std. Error"]))
+
+#Test if all of the test statistics are the same (or very similar)
+all.equal(as.numeric(package_model$TStatistic), as.numeric(coef(summary(base_r_model))[, "t value"]))
+
+#Test if all of the p-values are the same (or very similar)
+all.equal(as.numeric(package_model$PValue), as.numeric(coef(summary(base_r_model))[, "Pr(>|t|)"]))
+```
+
+Comparing the amount of time it takes to run lin_reg() with the amount of time it takes to run lm():
+```{r}
+bench::system_time(lin_reg(mpg~disp + cyl + hp + drat + wt, mtcars))
+bench::system_time(summary(lm(mpg~disp + cyl + hp + drat + wt, data = mtcars)))
+```
