@@ -7,4 +7,4 @@ either one or multiple relevant covariates of interest. The 'data' input is the 
 The lin_reg function can also handle categorical variables that should be treated as factors instead of continous variables. The function will automatically select one value of the categorical variable to be the 
 baseline value and create factors for each of the remaining values of the categorical variable. To use this feature, include the prefix as.factor() around the categorical covariate. 
 The function uses linear algebra and matrix multiplication to report the coefficient estimates, their associated test statistics and p-values, as well as each coefficient's standard errors. First, a design matrix is
-created for the model using the model.matrix function, and the outcome variable is extracted using model.outcome. We can then solve the formula 
+created for the model using the model.matrix function, and the outcome variable is extracted using model.outcome. We can then solve the formula (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y. 
