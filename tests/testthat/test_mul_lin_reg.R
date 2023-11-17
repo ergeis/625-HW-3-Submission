@@ -16,3 +16,4 @@ test2 <- expect_equal(as.numeric(my.model2$Coefficient), as.numeric(r.model2$coe
 test3 <- expect_equal(as.numeric(my.model3$Coefficient), as.numeric(r.model3$coefficients))
 
 
+file_coverage("R/mul_lin_reg.R", "tests/testthat/test_mul_lin_reg.R")
