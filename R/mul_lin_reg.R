@@ -4,6 +4,7 @@
 #' @param data a data set containing x and y
 #' @return Coefficient estimates and their standard errors and p-values for the multiple linear regression model
 #' @examples
+#' library(EGeis625)
 #' lin_reg(mpg~disp + cyl + hp + drat + wt + as.factor(gear), mtcars)
 
 lin_reg <- function(formula, data) {
